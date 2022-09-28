@@ -1,20 +1,43 @@
-import { useState, useEffect } from "react";
-
-function Hello() {
-  useEffect(() => {
-    console.log("hi :)");
-    return () => console.log("bye :(");
-  }, []);
-  return <h1>Hello</h1>;
-}
-
+import { useState } from "react";
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
+  const deletBtn = (e) => {
+    const li = e.target.parentElement;
+    li.remove();
+  };
+  const [toDo, setToDo] = useState("");
+  const [doList, setDoList] = useState([]);
+  const onChange = (e) => {
+    setToDo(e.target.value);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    setDoList((curArray) => [...curArray, toDo]);
+    setToDo("");
+  };
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>To Do List ({doList.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          value={toDo}
+          placeholder="Write To Do."
+          onChange={onChange}
+        ></input>
+        <button>Add List</button>
+      </form>
+      <hr />
+      <ul>
+        {doList.map((todo, index) => (
+          <li key={index}>
+            {todo}
+            <button onClick={deletBtn}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
