@@ -1,8 +1,7 @@
 import { useState } from "react";
 function App() {
-  const deletBtn = (e) => {
-    const li = e.target.parentElement;
-    li.remove();
+  const deletBtn = (index) => {
+    setDoList(doList.filter((todo, listIndex) => index !== listIndex));
   };
   const [toDo, setToDo] = useState("");
   const [doList, setDoList] = useState([]);
@@ -34,7 +33,7 @@ function App() {
         {doList.map((todo, index) => (
           <li key={index}>
             {todo}
-            <button onClick={deletBtn}>Delete</button>
+            <button onClick={() => deletBtn(index)}>Delete</button>
           </li>
         ))}
       </ul>
