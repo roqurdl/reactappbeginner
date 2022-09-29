@@ -12,3 +12,6 @@ localStorage 및 DB를 사용하지 않기에 parentElement를 사용 remove 시
 coin 정보를 fetch 사용해서 가져옴.
 select 와 input을 활용 내가 입력한 dollar의 양에 따라 해당 코인을 얼마나 구매할 수 있는지 계산.
 useState + useEffect 연습.
+
+//Movie Web
+using with react-router-dom@5.3.0
